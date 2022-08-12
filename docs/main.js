@@ -1,21 +1,25 @@
 // import 'https://unpkg.com/@georapbox/eye-dropper-element/dist/eye-dropper-defined.min.js';
 import '../src/eye-dropper-defined.js';
 
-const $console = document.getElementById('console');
+const consoleEl = document.getElementById('console');
+const pickedColorsEl = document.getElementById('picked-colors');
 
 document.addEventListener('eye-dropper:success', evt => {
   console.log('eye-dropper:success -> ', evt.detail);
-  $console.innerHTML += `<div>$ <span class="success">eye-dropper:success</span> -> ${JSON.stringify(evt.detail)}</div>`;
+  consoleEl.innerHTML += `<div>$ <span class="success">eye-dropper:success</span> -> ${JSON.stringify(evt.detail)}</div>`;
+  pickedColorsEl.innerHTML = evt.detail.colors.map(color => {
+    return `<li><div style="background-color:${color};"></div> ${color}</li>`;
+  }).join('');
 });
 
 document.addEventListener('eye-dropper:error', evt => {
   console.log('eye-dropper:error -> ', evt.detail);
-  $console.innerHTML += `<div>$ <span class="error">eye-dropper:error</span> -> ${evt.detail.error.name}: ${evt.detail.error.message}</div>`;
+  consoleEl.innerHTML += `<div>$ <span class="error">eye-dropper:error</span> -> ${evt.detail.error.name}: ${evt.detail.error.message}</div>`;
 });
 
 document.addEventListener('eye-dropper:abort', () => {
   console.log('eye-dropper:abort', 'Share is aborted');
-  $console.innerHTML += `<div>$ <span class="warning">eye-dropper:abort</span></div>`;
+  consoleEl.innerHTML += `<div>$ <span class="warning">eye-dropper:abort</span></div>`;
 });
 
 if (!window.EyeDropper) {

@@ -99,6 +99,29 @@ a {
   font-size: 0.8rem;
 }
 
+#picked-colors:empty {
+  display: none;
+}
+
+#picked-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#picked-colors li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#picked-colors li div {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
 @media screen and (max-width: 500px) {
   h1 { font-size: 1.5rem; }
   h2 { font-size: 1.3rem; }
