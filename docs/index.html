@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&lt;eye-dropper&gt;</title>
+  <meta name="description" content="A custom element that implements the EyeDropper API that allows the user to select colors from the screen.">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="container">
+    <h1>&lt;eye-dropper&gt;</h1>
+
+    <p>
+      A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.
+    </p>
+
+    <h2>Demo</h2>
+
+    <eye-dropper>
+      <span slot="button-label">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eyedropper" viewBox="0 0 16 16">
+          <path d="M13.354.646a1.207 1.207 0 0 0-1.708 0L8.5 3.793l-.646-.647a.5.5 0 1 0-.708.708L8.293 5l-7.147 7.146A.5.5 0 0 0 1 12.5v1.793l-.854.853a.5.5 0 1 0 .708.707L1.707 15H3.5a.5.5 0 0 0 .354-.146L11 7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-.647-.646 3.147-3.146a1.207 1.207 0 0 0 0-1.708l-2-2zM2 12.707l7-7L10.293 7l-7 7H2v-1.293z"/>
+        </svg>
+        Pick color
+      </span>
+    </eye-dropper>
+
+    <div class="palette">
+      <div style="background: #bcede0; color: #000;">#bcede0</div>
+      <div style="background: #34eedf; color: #000;">#34eedf</div>
+      <div style="background: #f652a0; color: #fff;">#f652a0</div>
+      <div style="background: #4c5270; color: #fff;">#4c5270</div>
+      <div style="background: #e7f2f8; color: #000;">#e7f2f8</div>
+      <div style="background: #75bdcb; color: #000;">#75bdcb</div>
+      <div style="background: #ffa384; color: #000;">#ffa384</div>
+      <div style="background: #efe7bc; color: #000;">#efe7bc</div>
+    </div>
+
+    <p class="not-supported-error" hidden></p>
+
+    <pre id="console"></pre>
+
+    <h2>Source</h2>
+
+    <p>
+      Source code and documentation can be found in <a href="https://github.com/georapbox/eye-dropper-element" target="_blank" rel="noreferrer noopener">Github repository</a>.
+    </p>
+
+    <h2>License</h2>
+
+    <p>
+      <a href="https://georapbox.mit-license.org/@2022" target="_blank" rel="noreferrer noopener">The MIT License (MIT)</a>
+    </p>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
