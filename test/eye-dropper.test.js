@@ -14,24 +14,45 @@ describe('<eye-dropper>', () => {
 
     expect(el.disabled).to.be.false;
     expect(el.getAttribute('disabled')).to.be.null;
+
+    expect(el.copy).to.be.false;
+    expect(el.getAttribute('copy')).to.be.null;
   });
 
   it('change default properties', async () => {
-    const el = await fixture(html`<eye-dropper disabled></eye-dropper>`);
+    const el = await fixture(html`<eye-dropper disabled copy></eye-dropper>`);
 
     expect(el.disabled).to.be.true;
     expect(el.getAttribute('disabled')).to.equal('');
+
+    expect(el.copy).to.be.true;
+    expect(el.getAttribute('copy')).to.equal('');
   });
 
   it('change properties programmatically', async () => {
     const el = await fixture(html`<eye-dropper></eye-dropper>`);
 
     el.disabled = true;
+    el.copy = true;
 
     await elementUpdated(el);
 
     expect(el.disabled).to.be.true;
     expect(el.getAttribute('disabled')).to.equal('');
+
+    expect(el.copy).to.be.true;
+    expect(el.getAttribute('copy')).to.equal('');
+
+    el.disabled = false;
+    el.copy = false;
+
+    await elementUpdated(el);
+
+    expect(el.disabled).to.be.false;
+    expect(el.getAttribute('disabled')).to.be.null;
+
+    expect(el.copy).to.be.false;
+    expect(el.getAttribute('copy')).to.be.null;
   });
 
   it('change button slot', async () => {

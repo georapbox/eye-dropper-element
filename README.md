@@ -50,6 +50,7 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.m
 | Name | Reflects | Type | Default | Description |
 | ---- | -------- | ---- | ------- | ----------- |
 | `disabled` | ✓ | Boolean | `false` | Optional. Defines if the color picker button is disabled. |
+| `copy` | ✓ | Boolean | `false` | Optional. Defines if the last color picked will be copied to clipboard. |
 
 ### Slots
 
@@ -78,68 +79,7 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.m
 | `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: String }, colors: String[] }` |
 | `eye-dropper:abort` | Emitted when color pick is aborted. | - |
 | `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: TypeError }` |
-
-## Example
-
-Below is a full usage example, with custom configuration and styling. Check the [demo page][demo] for a demonstration.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eye-dropper-element demo</title>
-  <style>
-     eye-dropper:not(:defined) {
-      display: none;
-    }
-
-    eye-dropper {
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    eye-dropper::part(button) {
-      background-color: #1a73e8;
-      color: #ffffff;
-      border: 0;
-      padding: 0.375rem 0.75rem;
-      border-radius: 0.25rem;
-      font-size: 1rem;
-      cursor: pointer;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-
-    eye-dropper::part(button--disabled) {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  </style>
-</head>
-<body>
-  <eye-dropper>
-    <span slot="button-label">Pick a color</span>
-  </eye-dropper>
-
-  <ul id="picked-colors"></ul>
-
-  <script type="module">
-    import { EyeDropperElement } from './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper.min.js';
-
-    EyeDropperElement.defineCustomElement();
-
-    document.addEventListener('eye-dropper:success', evt => {
-      document.getElementById('picked-colors').innerHTML = evt.detail.colors.map(color => {
-        return `<li><div style="background-color:${color};"></div> ${color}</li>`;
-      }).join('');
-    });
-  </script>
-</body>
-</html>
-```
+| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | - |
 
 ## Changelog
 

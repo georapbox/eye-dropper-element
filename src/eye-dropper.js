@@ -85,6 +85,18 @@ class EyeDropperElement extends HTMLElement {
     }
   }
 
+  get copy() {
+    return this.hasAttribute('copy');
+  }
+
+  set copy(value) {
+    if (value) {
+      this.setAttribute('copy', '');
+    } else {
+      this.removeAttribute('copy');
+    }
+  }
+
   async _onClick(evt) {
     evt.preventDefault();
 
@@ -111,6 +123,22 @@ class EyeDropperElement extends HTMLElement {
           colors: this._colors
         }
       }));
+
+      if (this.copy) {
+        try {
+          await navigator.clipboard.writeText(result.sRGBHex);
+
+          this.dispatchEvent(new CustomEvent('eye-dropper:copy', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: result.sRGBHex
+            }
+          }));
+        } catch {
+          // Fail silently...
+        }
+      }
     } catch (error) {
       if (error.name === 'AbortError') {
         this.dispatchEvent(new Event('eye-dropper:abort', {
