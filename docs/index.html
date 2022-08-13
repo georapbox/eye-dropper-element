@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>&lt;eye-dropper&gt;</title>
   <meta name="description" content="A custom element that implements the EyeDropper API that allows the user to select colors from the screen.">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="stylesheet" href="main.css">
 </head>
@@ -28,6 +29,18 @@
       <div style="background: #75bdcb; color: #000;">#75bdcb</div>
       <div style="background: #ffa384; color: #000;">#ffa384</div>
       <div style="background: #efe7bc; color: #000;">#efe7bc</div>
+    </div>
+
+    <div id="actions">
+      <div>
+        <input type="checkbox" id="copyInput">
+        <label for="copyInput">Copy to clipboard</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="disableInput">
+        <label for="disableInput">Disable button</label>
+      </div>
     </div>
 
     <eye-dropper>
