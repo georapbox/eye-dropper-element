@@ -134,6 +134,10 @@ a {
   h2 { font-size: 1.3rem; }
 }
 
+eye-dropper:not(:defined) {
+  display: none;
+}
+
 eye-dropper {
   display: block;
   margin-bottom: 1rem;
