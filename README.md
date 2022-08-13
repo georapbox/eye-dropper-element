@@ -79,7 +79,7 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.m
 | `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: String }, colors: String[] }` |
 | `eye-dropper:abort` | Emitted when color pick is aborted. | - |
 | `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: TypeError }` |
-| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | - |
+| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: String }` |
 
 ## Changelog
 
