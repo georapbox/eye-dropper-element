@@ -1,5 +1,5 @@
 const eyeDropperUrl = window.location.href.includes('127.0.0.1') || window.location.href.includes('localhost')
-  ? '../src/eye-dropper-defined.js'
+  ? '../../src/eye-dropper-defined.js'
   : 'https://unpkg.com/@georapbox/eye-dropper-element/dist/eye-dropper-defined.min.js';
 
 import(eyeDropperUrl).then(() => {
@@ -11,7 +11,7 @@ import(eyeDropperUrl).then(() => {
 
   document.addEventListener('eye-dropper:success', async evt => {
     console.log('eye-dropper:success -> ', evt.detail);
-    consoleEl.innerHTML += `<div>$ <span class="success">eye-dropper:success</span> -> ${JSON.stringify(evt.detail)}</div>`;
+    consoleEl.innerHTML += `<div>$ eye-dropper:success -> ${JSON.stringify(evt.detail)}</div>`;
     pickedColorsEl.innerHTML = evt.detail.colors.map(color => {
       return `<li><div style="background-color:${color};"></div> ${color}</li>`;
     }).join('');
@@ -19,17 +19,17 @@ import(eyeDropperUrl).then(() => {
 
   document.addEventListener('eye-dropper:error', evt => {
     console.log('eye-dropper:error -> ', evt.detail);
-    consoleEl.innerHTML += `<div>$ <span class="error">eye-dropper:error</span> -> ${evt.detail.error.name}: ${evt.detail.error.message}</div>`;
+    consoleEl.innerHTML += `<div>$ eye-dropper:error -> ${evt.detail.error.name}: ${evt.detail.error.message}</div>`;
   });
 
   document.addEventListener('eye-dropper:abort', () => {
     console.log('eye-dropper:abort');
-    consoleEl.innerHTML += `<div>$ <span class="warning">eye-dropper:abort</span></div>`;
+    consoleEl.innerHTML += `<div>$ eye-dropper:abort</div>`;
   });
 
   document.addEventListener('eye-dropper:copy', evt => {
     console.log('eye-dropper:copy ->', evt.detail.value);
-    consoleEl.innerHTML += `<div>$ <span class="info">eye-dropper:copy</span> -> ${JSON.stringify(evt.detail)}</div>`;
+    consoleEl.innerHTML += `<div>$ eye-dropper:copy -> ${JSON.stringify(evt.detail)}</div>`;
   });
 
   copyInput.addEventListener('change', evt => {

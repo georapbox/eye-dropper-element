@@ -1,0 +1,81 @@
+:root {
+  --error-color: #f53939;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --error-color: #fd7878;
+  }
+}
+
+#console:empty {
+  display: none;
+}
+
+.not-supported-error {
+  color: var(--error-color);
+}
+
+.not-supported-error[hidden] {
+  display: none;
+}
+
+.palette {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.palette div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+#picked-colors:empty {
+  display: none;
+}
+
+#picked-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+}
+
+#picked-colors li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#picked-colors li div {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+#actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+eye-dropper:not(:defined) {
+  display: none;
+}
+
+eye-dropper {
+  display: block;
+}
+
+eye-dropper span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
