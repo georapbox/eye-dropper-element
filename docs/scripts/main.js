@@ -1,6 +1,6 @@
 const eyeDropperUrl = window.location.href.includes('127.0.0.1') || window.location.href.includes('localhost')
-  ? '../../src/eye-dropper-defined.js'
-  : 'https://unpkg.com/@georapbox/eye-dropper-element/dist/eye-dropper-defined.min.js';
+  ? '../../dist/eye-dropper-defined.js'
+  : 'https://unpkg.com/@georapbox/eye-dropper-element/dist/eye-dropper-defined.js';
 
 import(eyeDropperUrl).then(() => {
   const eyeDropperEl = document.querySelector('eye-dropper');

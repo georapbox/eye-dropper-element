@@ -26,7 +26,7 @@ $ npm install --save @georapbox/eye-dropper-element
 ### Script
 
 ```js
-import { EyeDropperElement } from './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper.min.js';
+import { EyeDropperElement } from './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper.js';
 
 // Manually define the element.
 EyeDropperElement.defineCustomElement();
@@ -35,7 +35,7 @@ EyeDropperElement.defineCustomElement();
 Alternatively, you can import the automatically defined custom element.
 
 ```js
-import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.min.js';
+import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.js';
 ```
 
 ### Markup

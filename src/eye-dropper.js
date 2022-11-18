@@ -1,6 +1,8 @@
 const template = document.createElement('template');
 
-template.innerHTML = /* html */`
+const html = String.raw;
+
+template.innerHTML = html`
   <style>
     *,
     *::before,
@@ -20,18 +22,15 @@ template.innerHTML = /* html */`
 `;
 
 class EyeDropperElement extends HTMLElement {
+  #colors = [];
+
   constructor() {
     super();
-
-    this._colors = [];
 
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
-
-    this._onClick = this._onClick.bind(this);
-    this._onSlotChange = this._onSlotChange.bind(this);
   }
 
   static get observedAttributes() {
@@ -40,7 +39,7 @@ class EyeDropperElement extends HTMLElement {
 
   attributeChangedCallback(name) {
     if (name === 'disabled') {
-      const button = this._getButton();
+      const button = this.#getButton();
 
       button.disabled = this.disabled;
       button.setAttribute('aria-disabled', this.disabled);
@@ -56,21 +55,21 @@ class EyeDropperElement extends HTMLElement {
       this.hidden = true;
     }
 
-    const buttonSlot = this._getButtonSlot();
-    const button = this._getButton();
+    const buttonSlot = this.#getButtonSlot();
+    const button = this.#getButton();
 
-    buttonSlot && buttonSlot.addEventListener('slotchange', this._onSlotChange);
-    button && button.addEventListener('click', this._onClick);
+    buttonSlot && buttonSlot.addEventListener('slotchange', this.#onSlotChange);
+    button && button.addEventListener('click', this.#onClick);
 
-    this._upgradeProperty('disabled');
+    this.#upgradeProperty('disabled');
   }
 
   disconnectedCallback() {
-    const buttonSlot = this._getButtonSlot();
-    const button = this._getButton();
+    const buttonSlot = this.#getButtonSlot();
+    const button = this.#getButton();
 
-    buttonSlot && buttonSlot.removeEventListener('slotchange', this._onSlotChange);
-    button && button.removeEventListener('click', this._onClick);
+    buttonSlot && buttonSlot.removeEventListener('slotchange', this.#onSlotChange);
+    button && button.removeEventListener('click', this.#onClick);
   }
 
   get disabled() {
@@ -97,7 +96,7 @@ class EyeDropperElement extends HTMLElement {
     }
   }
 
-  async _onClick(evt) {
+  #onClick = async evt => {
     evt.preventDefault();
 
     if (!window.EyeDropper || this.disabled) {
@@ -111,8 +110,8 @@ class EyeDropperElement extends HTMLElement {
     try {
       result = await eyeDropper.open();
 
-      if (!this._colors.includes(result.sRGBHex)) {
-        this._colors.push(result.sRGBHex);
+      if (!this.#colors.includes(result.sRGBHex)) {
+        this.#colors.push(result.sRGBHex);
       }
 
       this.dispatchEvent(new CustomEvent('eye-dropper:success', {
@@ -120,7 +119,7 @@ class EyeDropperElement extends HTMLElement {
         composed: true,
         detail: {
           result,
-          colors: this._colors
+          colors: this.#colors
         }
       }));
 
@@ -153,29 +152,29 @@ class EyeDropperElement extends HTMLElement {
         }));
       }
     }
-  }
+  };
 
-  _onSlotChange(evt) {
+  #onSlotChange = evt => {
     if (evt.target && evt.target.name === 'button') {
-      const button = this._getButton();
+      const button = this.#getButton();
 
       if (button) {
-        button.removeEventListener('click', this._onClick);
-        button.addEventListener('click', this._onClick);
+        button.removeEventListener('click', this.#onClick);
+        button.addEventListener('click', this.#onClick);
 
         if (button.nodeName !== 'BUTTON' && !button.hasAttribute('role')) {
           button.setAttribute('role', 'button');
         }
       }
     }
-  }
+  };
 
-  _getButtonSlot() {
+  #getButtonSlot() {
     return this.shadowRoot.querySelector('slot[name="button"]');
   }
 
-  _getButton() {
-    const buttonSlot = this._getButtonSlot();
+  #getButton() {
+    const buttonSlot = this.#getButtonSlot();
 
     if (!buttonSlot) {
       return null;
@@ -186,7 +185,7 @@ class EyeDropperElement extends HTMLElement {
     });
   }
 
-  _upgradeProperty(prop) {
+  #upgradeProperty(prop) {
     if (Object.prototype.hasOwnProperty.call(this, prop)) {
       const value = this[prop];
       console.log(prop);
