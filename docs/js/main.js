@@ -1,8 +1,7 @@
-const eyeDropperUrl = window.location.href.includes('127.0.0.1') || window.location.href.includes('localhost')
-  ? '../../dist/eye-dropper-defined.js'
-  : 'https://unpkg.com/@georapbox/eye-dropper-element/dist/eye-dropper-defined.js';
+const isLocalhost = window.location.href.includes('127.0.0.1') || window.location.href.includes('localhost');
+const componentUrl = isLocalhost ? '../../dist/eye-dropper-defined.js' : '../lib/eye-dropper-defined.js';
 
-import(eyeDropperUrl).then(() => {
+import(componentUrl).then(() => {
   const eyeDropperEl = document.querySelector('eye-dropper');
   const consoleEl = document.getElementById('console');
   const pickedColorsEl = document.getElementById('picked-colors');
