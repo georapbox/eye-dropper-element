@@ -11,6 +11,7 @@ import(componentUrl).then(() => {
   document.addEventListener('eye-dropper:success', async evt => {
     console.log('eye-dropper:success -> ', evt.detail);
     consoleEl.innerHTML += `<div>$ eye-dropper:success -> ${JSON.stringify(evt.detail)}</div>`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
     pickedColorsEl.innerHTML = evt.detail.colors.map(color => {
       return `<li><div style="background-color:${color};"></div> ${color}</li>`;
     }).join('');
@@ -19,16 +20,19 @@ import(componentUrl).then(() => {
   document.addEventListener('eye-dropper:error', evt => {
     console.log('eye-dropper:error -> ', evt.detail);
     consoleEl.innerHTML += `<div>$ eye-dropper:error -> ${evt.detail.error.name}: ${evt.detail.error.message}</div>`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
   });
 
   document.addEventListener('eye-dropper:abort', () => {
     console.log('eye-dropper:abort');
     consoleEl.innerHTML += `<div>$ eye-dropper:abort</div>`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
   });
 
   document.addEventListener('eye-dropper:copy', evt => {
     console.log('eye-dropper:copy ->', evt.detail.value);
     consoleEl.innerHTML += `<div>$ eye-dropper:copy -> ${JSON.stringify(evt.detail)}</div>`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
   });
 
   copyInput.addEventListener('change', evt => {
