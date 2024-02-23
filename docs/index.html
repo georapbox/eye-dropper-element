@@ -13,17 +13,25 @@
   <script type="module" src="js/main.js"></script>
 </head>
 <body>
+  <noscript>
+    <div class="noscript-banner">
+      This page requires JavaScript to work properly.
+      Please enable JavaScript in your browser settings.
+    </div>
+  </noscript>
+
   <h1>&lt;eye-dropper&gt;</h1>
 
-  <p>
-    A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.
-  </p>
+  <div class="component-description">
+    <p>A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.</p>
+    <p><a href="https://github.com/georapbox/eye-dropper-element" target="_blank" rel="noreferrer noopener">Source code & documentation</a></p>
+  </div>
+
+  <!-- <p>A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.</p> -->
 
   <h2>Demo</h2>
 
-  <p>
-    Click the button below to open the color picker. Then click anywhere on the screen to pick a color.
-  </p>
+  <p>Click the button below to open the color picker. Then click anywhere on the screen, even outside the browser window, to pick a color.</p>
 
   <div class="demo">
     <div class="color-wheel"></div>
@@ -59,12 +67,6 @@
   <p class="not-supported-error" hidden></p>
 
   <pre><code id="console"></code></pre>
-
-  <h2>Source</h2>
-
-  <p>
-    Source code and documentation can be found in <a href="https://github.com/georapbox/eye-dropper-element" target="_blank" rel="noreferrer noopener">Github repository</a>.
-  </p>
 
   <h2>License</h2>
 
