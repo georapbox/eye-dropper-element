@@ -2,14 +2,12 @@
 [![npm license](https://img.shields.io/npm/l/@georapbox/eye-dropper-element.svg)](https://www.npmjs.com/package/@georapbox/eye-dropper-element)
 
 [demo]: https://georapbox.github.io/eye-dropper-element/
-[support]: https://caniuse.com/#feat=custom-elementsv1
-[polyfill]: https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements
-[license]: https://georapbox.mit-license.org/@2022
+[license]: https://github.com/georapbox/eye-dropper-element/blob/main/LICENSE
 [changelog]: https://github.com/georapbox/eye-dropper-element/blob/main/CHANGELOG.md
 
 # &lt;eye-dropper&gt;
 
-A custom element that implements the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
+A custom element that implements the [EyeDropper API](https://developer.mozilla.org/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
 
 > NOTE: The EyeDropper API is still experimental and supported only on Chromium based browsers. In not supported browsers, the color picker button is not displayed at all.
 
@@ -47,10 +45,10 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 ## API
 
 ### Properties
-| Name | Reflects | Type | Default | Description |
-| ---- | -------- | ---- | ------- | ----------- |
-| `disabled` | ✓ | Boolean | `false` | Optional. Defines if the color picker button is disabled. |
-| `copy` | ✓ | Boolean | `false` | Optional. Defines if the last color picked will be copied to clipboard. |
+| Name | Reflects | Type | Required | Default | Description |
+| ---- | -------- | ---- | -------- | ------- | ----------- |
+| `disabled` | ✓ | Boolean | - | `false` | Whether the color picker button is disabled. |
+| `copy` | ✓ | Boolean | - | `false` | Whether the picked color should be copied to clipboard. |
 
 ### Slots
 
@@ -85,14 +83,52 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 
 For API updates and breaking changes, check the [CHANGELOG][changelog].
 
-## Browser support
+## Development setup
 
-Browsers without native [custom element support][support] require a [polyfill][polyfill].
+### Prerequisites
 
-- Firefox
-- Chrome
-- Microsoft Edge
-- Safari
+The project requires `Node.js` and `npm` to be installed on your environment. Preferrably, use [nvm](https://github.com/nvm-sh/nvm) Node Version Manager and use the version of Node.js specified in the `.nvmrc` file by running `nvm use`.
+
+### Install dependencies
+
+Install the project dependencies by running the following command.
+
+```sh
+npm install
+```
+
+### Build for development
+
+Watch for changes and start a development server by running the following command.
+
+```sh
+npm start
+```
+
+### Linting
+
+Lint the code by running the following command.
+
+```sh
+npm run lint
+```
+
+### Testing
+
+Run the tests by running any of the following commands.
+
+```sh
+npm test
+npm run test:watch # watch mode
+```
+
+### Build for production
+
+Create a production build by running the following command.
+
+```sh
+npm run build
+```
 
 ## License
 

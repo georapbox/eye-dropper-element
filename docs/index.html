@@ -8,28 +8,31 @@
   <meta name="description" content="A custom element that implements the EyeDropper API that allows the user to select colors from the screen.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="lib/highlight/highlight-github.css">
   <link rel="stylesheet" href="css/water.css">
   <link rel="stylesheet" href="css/main.css">
-  <script type="module" src="js/main.js"></script>
+  <script src="lib/highlight/highlight.min.js" defer></script>
+  <script src="js/main.js" type="module"></script>
 </head>
 <body>
   <noscript>
     <div class="noscript-banner">
       This page requires JavaScript to work properly.
-      Please enable JavaScript in your browser settings.
     </div>
   </noscript>
 
   <h1>&lt;eye-dropper&gt;</h1>
 
   <div class="component-description">
-    <p>A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.</p>
+    <p>A custom element that implements the <a href="https://developer.mozilla.org/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.</p>
     <p><a href="https://github.com/georapbox/eye-dropper-element" target="_blank" rel="noreferrer noopener">Source code & documentation</a></p>
   </div>
 
-  <!-- <p>A custom element that implements the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper" target="_blank" rel="noopener noreferrer">EyeDropper API</a> that allows the user to select colors from the screen.</p> -->
-
   <h2>Demo</h2>
+
+  <div id="supportError" class="alert alert--error" hidden>
+    EyeDropper API is not supported by your browser.
+  </div>
 
   <p>Click the button below to open the color picker. Then click anywhere on the screen, even outside the browser window, to pick a color.</p>
 
@@ -64,14 +67,36 @@
 
   <ul id="picked-colors"></ul>
 
-  <p class="not-supported-error" hidden></p>
+  <pre><code id="console" class="language-bash"></code></pre>
 
-  <pre><code id="console"></code></pre>
+  <details open>
+    <summary>Source code</summary>
+    <h3>HTML</h3>
+    <pre><code id="sourceCodeHTML">&lt;eye-dropper&gt;&lt;/eye-dropper&gt;</code></pre>
+    <h3>JavaScript</h3>
+    <pre><code id="sourceCodeJS">const eyeDropper = document.querySelector('eye-dropper');
+
+eyeDropper.addEventListener('eye-dropper:success', evt => {
+  console.log('eye-dropper:success -> ', evt.detail);
+});
+
+eyeDropper.addEventListener('eye-dropper:error', evt => {
+  console.log('eye-dropper:error -> ', evt.detail);
+});
+
+eyeDropper.addEventListener('eye-dropper:abort', () => {
+  console.log('eye-dropper:abort');
+});
+
+eyeDropper.addEventListener('eye-dropper:copy', evt => {
+  console.log('eye-dropper:copy ->', evt.detail.value);
+});</code></pre>
+  </details>
 
   <h2>License</h2>
 
   <p>
-    <a href="https://georapbox.mit-license.org/@2022" target="_blank" rel="noreferrer noopener">The MIT License (MIT)</a>
+    <a href="https://github.com/georapbox/eye-dropper-element/blob/main/LICENSE" target="_blank" rel="noreferrer noopener">The MIT License (MIT)</a>
   </p>
 </body>
 </html>

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v2.0.1 (2024-08-31)
+
+- Add type definitions for TypeScript.
+- Replace parcel with esbuild for bundling.
+- Update ESLint to use flat configuration.
+- Use Prettier for code formatting.
+- Update dev dependencies.
+
 ## v2.0.0 (2022-11-18)
 
 - Refactor to use private class fields.
