@@ -1,5 +1,5 @@
 :root {
-  --body-max-width: 700px;
+  --body-max-width: 43.75rem;
 }
 
 *,
@@ -30,7 +30,7 @@
 }
 
 #console {
-  max-height: 300px;
+  max-height: 15.625rem;
 }
 
 pre > code {

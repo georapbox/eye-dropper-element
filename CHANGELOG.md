@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v2.0.1 (2024-09-01)
+## v3.0.0 (2024-09-02)
+
+### Breaking Changes
+
+- The component is not hidden by default if EyeDropper API is not supported, instead it will dispatch an event `eye-dropper:error` with an error message when clicked. You can check if the API is supported by using the a simple check like `'EyeDropper' in window`.
 
 - Add type definitions for TypeScript.
 - Replace parcel with esbuild for bundling.

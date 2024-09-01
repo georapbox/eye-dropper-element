@@ -9,7 +9,8 @@
 
 A custom element that implements the [EyeDropper API](https://developer.mozilla.org/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
 
-> NOTE: The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button is not displayed at all.
+> [!NOTE]
+> The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button will dispatch an event `eye-dropper:error` with an error message when clicked. You can check if the API is supported by using the a simple check like `'EyeDropper' in window`.
 
 [API documentation](#api) &bull; [Demo][demo]
 
@@ -80,7 +81,7 @@ By default, the component is style-free to remain as less opinionated as possibl
 | ---- | ----------- | ------------ |
 | `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: string }, colors: string[] }` |
 | `eye-dropper:abort` | Emitted when color pick is aborted. | - |
-| `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: TypeError }` |
+| `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: Error \| TypeError }` |
 | `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: string }` |
 
 ## Changelog

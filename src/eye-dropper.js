@@ -132,10 +132,6 @@ class EyeDropperElement extends HTMLElement {
     this.#upgradeProperty('disabled');
     this.#upgradeProperty('copy');
 
-    if (!('EyeDropper' in window)) {
-      this.hidden = true;
-    }
-
     const buttonSlot = this.#getButtonSlot();
     const button = this.#getButton();
 
@@ -163,6 +159,14 @@ class EyeDropperElement extends HTMLElement {
     evt.preventDefault();
 
     if (!('EyeDropper' in window) || this.disabled) {
+      this.dispatchEvent(
+        new CustomEvent('eye-dropper:error', {
+          bubbles: true,
+          composed: true,
+          detail: { error: new Error('The EyeDropper API is not supported by the browser.') }
+        })
+      );
+
       return;
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "@georapbox/eye-dropper-element",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "A custom element that implements the EyeDropper API that allows the user to select colors from the screen.",
   "main": "dist/eye-dropper.js",
   "module": "dist/eye-dropper.js",
