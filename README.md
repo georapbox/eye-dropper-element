@@ -9,14 +9,14 @@
 
 A custom element that implements the [EyeDropper API](https://developer.mozilla.org/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
 
-> NOTE: The EyeDropper API is still experimental and supported only on Chromium based browsers. In not supported browsers, the color picker button is not displayed at all.
+> NOTE: The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button is not displayed at all.
 
 [API documentation](#api) &bull; [Demo][demo]
 
 ## Install
 
 ```sh
-$ npm install --save @georapbox/eye-dropper-element
+npm install --save @georapbox/eye-dropper-element
 ```
 
 ## Usage
@@ -42,6 +42,10 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 <eye-dropper></eye-dropper>
 ```
 
+### Style
+
+By default, the component is style-free to remain as less opinionated as possible. However, you can style the various elements of the component using [CSS Parts](#css-parts) provided for this purpose.
+
 ## API
 
 ### Properties
@@ -54,8 +58,8 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 
 | Name | Description |
 | ---- | ----------- |
-| `button` | Override the color picker button with another element of your preference. Example: `<a href="#" slot="button" role="button">Pick a color</a>` |
-| `button-label` | Override the color picker button's label with content of your preference. Example: `<span slot="button-label">Pick a color</span>` |
+| `button` | The slot for the button element. Example: `<a href="#" slot="button" role="button">Pick a color</a>` |
+| `button-label` | The slot for the button label. Example: `<span slot="button-label">Pick a color</span>` |
 
 ### CSS Parts
 
@@ -74,10 +78,10 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 
 | Name | Description | Event Detail |
 | ---- | ----------- | ------------ |
-| `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: String }, colors: String[] }` |
+| `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: string }, colors: string[] }` |
 | `eye-dropper:abort` | Emitted when color pick is aborted. | - |
 | `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: TypeError }` |
-| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: String }` |
+| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: string }` |
 
 ## Changelog
 

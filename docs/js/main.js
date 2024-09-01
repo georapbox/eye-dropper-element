@@ -15,8 +15,12 @@ const renderSourceCode = (eyeDropperEl, sourceCodeEl) => {
   }
 
   const attrs = Array.from(eyeDropperEl.attributes);
-  const attrNames = attrs.length > 0 ? attrs.map(attr => attr.name).join(' ') : '';
-  const code = `&lt;eye-dropper${attrNames ? ' ' + attrNames : ''}&gt;&lt;/eye-dropper&gt;`;
+  const getDesiredAttrs = attr => ['copy', 'disabled'].includes(attr.name);
+  const getAttrName = attr => attr.name;
+  const attrNames = attrs.length > 0 ? attrs.filter(getDesiredAttrs).map(getAttrName).join(' ') : '';
+  const code = `&lt;eye-dropper${attrNames ? ' ' + attrNames : ''}&gt;
+  &lt;span slot="button-label"&gt;Pick a color&lt;/span&gt;
+&lt;/eye-dropper&gt;`;
   sourceCodeEl.innerHTML = code;
   window.hljs.highlightBlock(sourceCodeEl);
 };
