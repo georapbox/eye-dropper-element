@@ -9,8 +9,8 @@
 
 A custom element that implements the [EyeDropper API](https://developer.mozilla.org/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
 
-> [!NOTE]
-> The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button will dispatch an event `eye-dropper:error` with an error message when clicked. You can check if the API is supported by using the a simple check like `'EyeDropper' in window`.
+> [!IMPORTANT]
+> The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button will dispatch an event `eye-dropper:error` with an error message when clicked. You can check if the API is supported by using the a simple check like `'EyeDropper' in window` to decide whether to show the color picker button or handle the error event.
 
 [API documentation](#api) &bull; [Demo][demo]
 

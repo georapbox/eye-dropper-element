@@ -1,11 +1,22 @@
 // @ts-check
 
 /**
- * Represents a value that may be of type T, or null.
- *
  * @template T
  * @typedef {T | null} Nullable
  */
+
+/**
+ * @typedef {Object} EyeDropperResult
+ * @property {string} sRGBHex
+ */
+
+/**
+ * @typedef {Object} EyeDropper
+ * @property {() => Promise<EyeDropperResult>} open
+ */
+
+/** @type {Window & typeof globalThis & {EyeDropper?: {new(): EyeDropper}}} */
+const windowWithEyeDropper = window;
 
 const styles = /* css */ `
   *,
@@ -58,6 +69,9 @@ template.innerHTML = /* html */ `
  * @method defineCustomElement - Static method. Defines the custom element with the given name.
  */
 class EyeDropperElement extends HTMLElement {
+  /** @type {Nullable<EyeDropper>} */
+  #eyeDropper = null;
+
   /** @type {string[]} */
   #colors = [];
 
@@ -158,25 +172,26 @@ class EyeDropperElement extends HTMLElement {
   #handleClick = async evt => {
     evt.preventDefault();
 
-    if (!('EyeDropper' in window) || this.disabled) {
+    if (this.disabled) {
+      return;
+    }
+
+    if (typeof windowWithEyeDropper.EyeDropper === 'undefined') {
       this.dispatchEvent(
         new CustomEvent('eye-dropper:error', {
           bubbles: true,
           composed: true,
-          detail: { error: new Error('The EyeDropper API is not supported by the browser.') }
+          detail: { error: new Error('The EyeDropper API is not supported by this platform.') }
         })
       );
 
       return;
     }
 
-    // @ts-expect-error: EyeDropper is experimental and might not be available in all browsers.
-    const eyeDropper = new window.EyeDropper();
-
-    let result;
+    const eyeDropper = this.#eyeDropper ?? (this.#eyeDropper = new windowWithEyeDropper.EyeDropper());
 
     try {
-      result = await eyeDropper.open();
+      const result = await eyeDropper.open();
 
       if (!this.#colors.includes(result.sRGBHex)) {
         this.#colors.push(result.sRGBHex);
