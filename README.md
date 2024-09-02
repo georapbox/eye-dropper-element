@@ -2,23 +2,22 @@
 [![npm license](https://img.shields.io/npm/l/@georapbox/eye-dropper-element.svg)](https://www.npmjs.com/package/@georapbox/eye-dropper-element)
 
 [demo]: https://georapbox.github.io/eye-dropper-element/
-[support]: https://caniuse.com/#feat=custom-elementsv1
-[polyfill]: https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements
-[license]: https://georapbox.mit-license.org/@2022
+[license]: https://github.com/georapbox/eye-dropper-element/blob/main/LICENSE
 [changelog]: https://github.com/georapbox/eye-dropper-element/blob/main/CHANGELOG.md
 
 # &lt;eye-dropper&gt;
 
-A custom element that implements the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
+A custom element that implements the [EyeDropper API](https://developer.mozilla.org/docs/Web/API/EyeDropper) that allows the user to select colors from the screen.
 
-> NOTE: The EyeDropper API is still experimental and supported only on Chromium based browsers. In not supported browsers, the color picker button is not displayed at all.
+> [!IMPORTANT]
+> The EyeDropper API is still experimental and supported only on desktop Chromium based browsers. In not supported browsers, the color picker button will dispatch an event `eye-dropper:error` with an error message when clicked. You can check if the API is supported by using the a simple check like `'EyeDropper' in window` to decide whether to show the color picker button or handle the error event.
 
 [API documentation](#api) &bull; [Demo][demo]
 
 ## Install
 
 ```sh
-$ npm install --save @georapbox/eye-dropper-element
+npm install --save @georapbox/eye-dropper-element
 ```
 
 ## Usage
@@ -44,20 +43,24 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 <eye-dropper></eye-dropper>
 ```
 
+### Style
+
+By default, the component is style-free to remain as less opinionated as possible. However, you can style the various elements of the component using [CSS Parts](#css-parts) provided for this purpose.
+
 ## API
 
 ### Properties
-| Name | Reflects | Type | Default | Description |
-| ---- | -------- | ---- | ------- | ----------- |
-| `disabled` | ✓ | Boolean | `false` | Optional. Defines if the color picker button is disabled. |
-| `copy` | ✓ | Boolean | `false` | Optional. Defines if the last color picked will be copied to clipboard. |
+| Name | Reflects | Type | Required | Default | Description |
+| ---- | -------- | ---- | -------- | ------- | ----------- |
+| `disabled` | ✓ | Boolean | - | `false` | Whether the color picker button is disabled. |
+| `copy` | ✓ | Boolean | - | `false` | Whether the picked color should be copied to clipboard. |
 
 ### Slots
 
 | Name | Description |
 | ---- | ----------- |
-| `button` | Override the color picker button with another element of your preference. Example: `<a href="#" slot="button" role="button">Pick a color</a>` |
-| `button-label` | Override the color picker button's label with content of your preference. Example: `<span slot="button-label">Pick a color</span>` |
+| `button` | The slot for the button element. Example: `<a href="#" slot="button" role="button">Pick a color</a>` |
+| `button-label` | The slot for the button label. Example: `<span slot="button-label">Pick a color</span>` |
 
 ### CSS Parts
 
@@ -76,23 +79,61 @@ import './node_modules/@georapbox/eye-dropper-element/dist/eye-dropper-defined.j
 
 | Name | Description | Event Detail |
 | ---- | ----------- | ------------ |
-| `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: String }, colors: String[] }` |
+| `eye-dropper:success` | Emitted when color pick is successful. | `{ result: { sRGBHex: string }, colors: string[] }` |
 | `eye-dropper:abort` | Emitted when color pick is aborted. | - |
-| `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: TypeError }` |
-| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: String }` |
+| `eye-dropper:error` | Emitted if color pick fails for any reason. | `{ error: Error \| TypeError }` |
+| `eye-dropper:copy` | Emitted if `copy` property is `true` and the picked color is successfully copied to clipbaord. | `{ value: string }` |
 
 ## Changelog
 
 For API updates and breaking changes, check the [CHANGELOG][changelog].
 
-## Browser support
+## Development setup
 
-Browsers without native [custom element support][support] require a [polyfill][polyfill].
+### Prerequisites
 
-- Firefox
-- Chrome
-- Microsoft Edge
-- Safari
+The project requires `Node.js` and `npm` to be installed on your environment. Preferrably, use [nvm](https://github.com/nvm-sh/nvm) Node Version Manager and use the version of Node.js specified in the `.nvmrc` file by running `nvm use`.
+
+### Install dependencies
+
+Install the project dependencies by running the following command.
+
+```sh
+npm install
+```
+
+### Build for development
+
+Watch for changes and start a development server by running the following command.
+
+```sh
+npm start
+```
+
+### Linting
+
+Lint the code by running the following command.
+
+```sh
+npm run lint
+```
+
+### Testing
+
+Run the tests by running any of the following commands.
+
+```sh
+npm test
+npm run test:watch # watch mode
+```
+
+### Build for production
+
+Create a production build by running the following command.
+
+```sh
+npm run build
+```
 
 ## License
 

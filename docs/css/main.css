@@ -1,21 +1,20 @@
 :root {
-  --body-max-width: 600px;
-  --error-color: #f53939;
+  --body-max-width: 56.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --error-color: #fd7878;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .noscript-banner {
   width: 100%;
   padding: 0.5rem 0.75rem;
   border-radius: var(--border-radius);
-  background-color: var(--focus);
+  background-color: #f8d7da;
   text-align: center;
-  text-wrap: balance;
+  color: #000000;
 }
 
 .component-description p {
@@ -26,16 +25,30 @@
   margin-bottom: 0;
 }
 
-#console:empty {
+details:has(#console:empty) {
   display: none;
 }
 
 #console {
-  max-height: 300px;
+  max-height: 15.625rem;
+  overscroll-behavior: contain;
 }
 
-.not-supported-error {
-  color: var(--error-color);
+pre > code {
+  border: 1px solid var(--border);
+}
+
+.alert {
+  margin-block-end: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--background);
+  color: var(--text-main);
+}
+
+.alert--error {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 .not-supported-error[hidden] {
@@ -47,20 +60,33 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  background: var(--background-alt);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  overflow: hidden;
+  column-gap: 3rem;
+  row-gap: 1rem;
+}
+
+.demo input[type='checkbox'] {
+  min-width: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.demo #actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .color-wheel {
-  min-width: 200px;
-  width: 200px;
-  height: 200px;
+  aspect-ratio: 1;
+  width: 16.625rem;
   border-radius: 50%;
   background: conic-gradient(in hsl longer hue, hsl(0deg 100% 50%), hsl(360deg 100% 50%));
+}
+
+@media screen and (max-width: 37.5rem) {
+  .color-wheel {
+    width: 12.625rem;
+  }
 }
 
 /* For browsers that don't support hue interpolation methods */
@@ -75,10 +101,18 @@
 }
 
 #picked-colors {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr));
   gap: 1rem;
-  padding: 0;
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  max-height: 15.625rem;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--background-alt);
+  text-align: center;
 }
 
 #picked-colors li {
@@ -88,8 +122,8 @@
 }
 
 #picked-colors li div {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
 }
 
@@ -97,6 +131,24 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+browser-window:not(:defined) {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+}
+
+browser-window {
+  display: block;
+}
+
+browser-window::part(base) {
+  border-color: var(--border);
+}
+
+browser-window::part(main) {
+  padding: 1rem;
 }
 
 eye-dropper:not(:defined) {
@@ -112,4 +164,8 @@ eye-dropper span {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+eye-dropper [slot="button"] {
+  margin: 0;
 }
