@@ -27,10 +27,6 @@ const renderSourceCode = (eyeDropperEl, sourceCodeEl) => {
   window.hljs.highlightElement(sourceCodeEl);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.hljs.highlightAll();
-});
-
 document.addEventListener('eye-dropper:success', async evt => {
   console.log('eye-dropper:success -> ', evt.detail);
   consoleEl.innerHTML += `<div>$ eye-dropper:success -> ${JSON.stringify(evt.detail)}</div>`;
