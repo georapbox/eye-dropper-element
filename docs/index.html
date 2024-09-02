@@ -34,40 +34,43 @@
     EyeDropper API is not supported by your browser.
   </div>
 
-  <p>Click the button below to open the color picker. Then click anywhere on the screen, even outside the browser window, to pick a color.</p>
+  <browser-window url="https://github.com/georapbox/eye-dropper-element" icon>
+    <div class="demo">
+      <div class="color-wheel"></div>
 
-  <div class="demo">
-    <div class="color-wheel"></div>
+      <div>
+        <div id="actions">
+          <div>
+            <input type="checkbox" id="copyInput">
+            <label for="copyInput">Copy to clipboard</label>
+          </div>
 
-    <div>
-      <div id="actions">
-        <div>
-          <input type="checkbox" id="copyInput">
-          <label for="copyInput">Copy to clipboard</label>
+          <div>
+            <input type="checkbox" id="disableInput">
+            <label for="disableInput">Disable button</label>
+          </div>
+
+          <eye-dropper>
+            <button type="button" slot="button">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.354.646a1.207 1.207 0 0 0-1.708 0L8.5 3.793l-.646-.647a.5.5 0 1 0-.708.708L8.293 5l-7.147 7.146A.5.5 0 0 0 1 12.5v1.793l-.854.853a.5.5 0 1 0 .708.707L1.707 15H3.5a.5.5 0 0 0 .354-.146L11 7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-.647-.646 3.147-3.146a1.207 1.207 0 0 0 0-1.708l-2-2zM2 12.707l7-7L10.293 7l-7 7H2v-1.293z" />
+                </svg>
+                Pick color
+              </span>
+            </button>
+          </eye-dropper>
         </div>
-
-        <div>
-          <input type="checkbox" id="disableInput">
-          <label for="disableInput">Disable button</label>
-        </div>
-
-        <eye-dropper>
-          <button type="button" slot="button">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M13.354.646a1.207 1.207 0 0 0-1.708 0L8.5 3.793l-.646-.647a.5.5 0 1 0-.708.708L8.293 5l-7.147 7.146A.5.5 0 0 0 1 12.5v1.793l-.854.853a.5.5 0 1 0 .708.707L1.707 15H3.5a.5.5 0 0 0 .354-.146L11 7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-.647-.646 3.147-3.146a1.207 1.207 0 0 0 0-1.708l-2-2zM2 12.707l7-7L10.293 7l-7 7H2v-1.293z" />
-              </svg>
-              Pick color
-            </span>
-          </button>
-        </eye-dropper>
       </div>
     </div>
-  </div>
 
-  <ul id="picked-colors"></ul>
+    <ul id="picked-colors"></ul>
+  </browser-window>
 
-  <pre><code id="console" class="language-bash"></code></pre>
+  <details open>
+    <summary>Events</summary>
+    <pre><code id="console" class="language-bash"></code></pre>
+  </details>
 
   <details open>
     <summary>Source code</summary>

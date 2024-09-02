@@ -1,3 +1,5 @@
+import '../lib/browser-window.js';
+
 const url = window.location.href;
 const isLocalhost = url.includes('127.0.0.1') || url.includes('localhost');
 const componentUrl = isLocalhost ? '../../dist/eye-dropper.js' : '../lib/eye-dropper.js';
@@ -22,7 +24,7 @@ const renderSourceCode = (eyeDropperEl, sourceCodeEl) => {
   &lt;span slot="button-label"&gt;Pick a color&lt;/span&gt;
 &lt;/eye-dropper&gt;`;
   sourceCodeEl.innerHTML = code;
-  window.hljs.highlightBlock(sourceCodeEl);
+  window.hljs.highlightElement(sourceCodeEl);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,9 +37,10 @@ document.addEventListener('eye-dropper:success', async evt => {
   consoleEl.scrollTop = consoleEl.scrollHeight;
   pickedColorsEl.innerHTML = evt.detail.colors
     .map(color => {
-      return `<li><div style="background-color:${color};"></div> ${color}</li>`;
+      return `<li><div style="box-shadow: 0px 0px 2px var(--text-main); background-color:${color};"></div> ${color}</li>`;
     })
     .join('');
+  pickedColorsEl.scrollTop = pickedColorsEl.scrollHeight;
 });
 
 document.addEventListener('eye-dropper:error', evt => {

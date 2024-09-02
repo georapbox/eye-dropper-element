@@ -2,25 +2,28 @@
  * @georapbox/eye-dropper-element
  * A custom element that implements the EyeDropper API that allows the user to select colors from the screen.
  *
- * @version 2.0.1
+ * @version 3.0.0
  * @homepage https://github.com/georapbox/eye-dropper-element#readme
  * @author George Raptis <georapbox@gmail.com>
  * @license MIT
  */
-var a=`
+var n=window,a=`
   *,
   *::before,
   *::after {
     box-sizing: border-box;
   }
-  :host([hidden]) {
+
+  :host([hidden]),
+  [hidden],
+  ::slotted([hidden]) {
     display: none !important;
   }
-`,i=document.createElement("template");i.innerHTML=`
+`,r=document.createElement("template");r.innerHTML=`
   <style>${a}</style>
   <slot name="button">
     <button type="button" part="button">
       <slot name="button-label">Pick color</slot>
     </button>
   </slot>
-`;var n=class r extends HTMLElement{#s=[];constructor(){super(),this.shadowRoot||this.attachShadow({mode:"open",delegatesFocus:!0}).appendChild(i.content.cloneNode(!0))}static get observedAttributes(){return["disabled"]}attributeChangedCallback(t,e,s){if(t==="disabled"&&e!==s){let o=this.#e();o&&(o instanceof HTMLButtonElement&&(o.disabled=this.disabled),o.setAttribute("aria-disabled",this.disabled.toString()),o.part&&o.part.contains("button")&&o.part.toggle("button--disabled",this.disabled))}}get disabled(){return this.hasAttribute("disabled")}set disabled(t){this.toggleAttribute("disabled",!!t)}get copy(){return this.hasAttribute("copy")}set copy(t){this.toggleAttribute("copy",!!t)}connectedCallback(){this.#i("disabled"),this.#i("copy"),"EyeDropper"in window||(this.hidden=!0);let t=this.#o(),e=this.#e();t?.addEventListener("slotchange",this.#n),e?.addEventListener("click",this.#t)}disconnectedCallback(){let t=this.#o(),e=this.#e();t?.removeEventListener("slotchange",this.#n),e?.removeEventListener("click",this.#t)}#t=async t=>{if(t.preventDefault(),!("EyeDropper"in window)||this.disabled)return;let e=new window.EyeDropper,s;try{if(s=await e.open(),this.#s.includes(s.sRGBHex)||this.#s.push(s.sRGBHex),this.dispatchEvent(new CustomEvent("eye-dropper:success",{bubbles:!0,composed:!0,detail:{result:s,colors:this.#s}})),this.copy)try{await navigator.clipboard.writeText(s.sRGBHex),this.dispatchEvent(new CustomEvent("eye-dropper:copy",{bubbles:!0,composed:!0,detail:{value:s.sRGBHex}}))}catch{}}catch(o){o.name==="AbortError"?this.dispatchEvent(new Event("eye-dropper:abort",{bubbles:!0,composed:!0})):this.dispatchEvent(new CustomEvent("eye-dropper:error",{bubbles:!0,composed:!0,detail:{error:o}}))}};#n=t=>{let e=t.target;if(e instanceof HTMLSlotElement&&e.name==="button"){let s=this.#e();s&&(s.removeEventListener("click",this.#t),s.addEventListener("click",this.#t),s.nodeName!=="BUTTON"&&!s.hasAttribute("role")&&s.setAttribute("role","button"))}};#o(){return this.shadowRoot?.querySelector('slot[name="button"]')??null}#e(){let t=this.#o();return t?t.assignedElements({flatten:!0}).find(e=>e.nodeName==="BUTTON"||e.getAttribute("slot")==="button")??null:null}#i(t){let e=this;if(Object.prototype.hasOwnProperty.call(e,t)){let s=e[t];delete e[t],e[t]=s}}static defineCustomElement(t="eye-dropper"){typeof window<"u"&&!window.customElements.get(t)&&window.customElements.define(t,r)}};export{n as EyeDropperElement};
+`;var i=class d extends HTMLElement{#n=null;#o=[];constructor(){super(),this.shadowRoot||this.attachShadow({mode:"open",delegatesFocus:!0}).appendChild(r.content.cloneNode(!0))}static get observedAttributes(){return["disabled"]}attributeChangedCallback(t,o,e){if(t==="disabled"&&o!==e){let s=this.#e();s&&(s instanceof HTMLButtonElement&&(s.disabled=this.disabled),s.setAttribute("aria-disabled",this.disabled.toString()),s.part&&s.part.contains("button")&&s.part.toggle("button--disabled",this.disabled))}}get disabled(){return this.hasAttribute("disabled")}set disabled(t){this.toggleAttribute("disabled",!!t)}get copy(){return this.hasAttribute("copy")}set copy(t){this.toggleAttribute("copy",!!t)}connectedCallback(){this.#r("disabled"),this.#r("copy");let t=this.#s(),o=this.#e();t?.addEventListener("slotchange",this.#i),o?.addEventListener("click",this.#t)}disconnectedCallback(){let t=this.#s(),o=this.#e();t?.removeEventListener("slotchange",this.#i),o?.removeEventListener("click",this.#t)}#t=async t=>{if(t.preventDefault(),this.disabled)return;if(typeof n.EyeDropper>"u"){this.dispatchEvent(new CustomEvent("eye-dropper:error",{bubbles:!0,composed:!0,detail:{error:new Error("The EyeDropper API is not supported by this platform.")}}));return}let o=this.#n??(this.#n=new n.EyeDropper);try{let e=await o.open();if(this.#o.includes(e.sRGBHex)||this.#o.push(e.sRGBHex),this.dispatchEvent(new CustomEvent("eye-dropper:success",{bubbles:!0,composed:!0,detail:{result:e,colors:this.#o}})),this.copy)try{await navigator.clipboard.writeText(e.sRGBHex),this.dispatchEvent(new CustomEvent("eye-dropper:copy",{bubbles:!0,composed:!0,detail:{value:e.sRGBHex}}))}catch{}}catch(e){e.name==="AbortError"?this.dispatchEvent(new Event("eye-dropper:abort",{bubbles:!0,composed:!0})):this.dispatchEvent(new CustomEvent("eye-dropper:error",{bubbles:!0,composed:!0,detail:{error:e}}))}};#i=t=>{let o=t.target;if(o instanceof HTMLSlotElement&&o.name==="button"){let e=this.#e();e&&(e.removeEventListener("click",this.#t),e.addEventListener("click",this.#t),e.nodeName!=="BUTTON"&&!e.hasAttribute("role")&&e.setAttribute("role","button"))}};#s(){return this.shadowRoot?.querySelector('slot[name="button"]')??null}#e(){let t=this.#s();return t?t.assignedElements({flatten:!0}).find(o=>o.nodeName==="BUTTON"||o.getAttribute("slot")==="button")??null:null}#r(t){let o=this;if(Object.prototype.hasOwnProperty.call(o,t)){let e=o[t];delete o[t],o[t]=e}}static defineCustomElement(t="eye-dropper"){typeof window<"u"&&!window.customElements.get(t)&&window.customElements.define(t,d)}};export{i as EyeDropperElement};

@@ -1,5 +1,5 @@
 :root {
-  --body-max-width: 43.75rem;
+  --body-max-width: 56.25rem;
 }
 
 *,
@@ -25,12 +25,13 @@
   margin-bottom: 0;
 }
 
-#console:empty {
+details:has(#console:empty) {
   display: none;
 }
 
 #console {
   max-height: 15.625rem;
+  overscroll-behavior: contain;
 }
 
 pre > code {
@@ -59,20 +60,33 @@ pre > code {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  background: var(--background-alt);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  overflow: hidden;
+  column-gap: 3rem;
+  row-gap: 1rem;
+}
+
+.demo input[type='checkbox'] {
+  min-width: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.demo #actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .color-wheel {
-  min-width: 200px;
-  width: 200px;
-  height: 200px;
+  aspect-ratio: 1;
+  width: 16.625rem;
   border-radius: 50%;
   background: conic-gradient(in hsl longer hue, hsl(0deg 100% 50%), hsl(360deg 100% 50%));
+}
+
+@media screen and (max-width: 37.5rem) {
+  .color-wheel {
+    width: 12.625rem;
+  }
 }
 
 /* For browsers that don't support hue interpolation methods */
@@ -87,10 +101,18 @@ pre > code {
 }
 
 #picked-colors {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr));
   gap: 1rem;
-  padding: 0;
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  max-height: 15.625rem;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--background-alt);
+  text-align: center;
 }
 
 #picked-colors li {
@@ -100,8 +122,8 @@ pre > code {
 }
 
 #picked-colors li div {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
 }
 
@@ -109,6 +131,24 @@ pre > code {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+browser-window:not(:defined) {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+}
+
+browser-window {
+  display: block;
+}
+
+browser-window::part(base) {
+  border-color: var(--border);
+}
+
+browser-window::part(main) {
+  padding: 1rem;
 }
 
 eye-dropper:not(:defined) {
