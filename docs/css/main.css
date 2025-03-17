@@ -80,19 +80,12 @@ pre > code {
   aspect-ratio: 1;
   width: 16.625rem;
   border-radius: 50%;
-  background: conic-gradient(in hsl longer hue, hsl(0deg 100% 50%), hsl(360deg 100% 50%));
+  background: conic-gradient(red, yellow, green, cyan, blue, magenta, red);
 }
 
 @media screen and (max-width: 37.5rem) {
   .color-wheel {
     width: 12.625rem;
-  }
-}
-
-/* For browsers that don't support hue interpolation methods */
-@supports not (background: conic-gradient(in hsl longer hue)) {
-  .color-wheel {
-    background: conic-gradient(red, yellow, green, cyan, blue, magenta, red);
   }
 }
 
